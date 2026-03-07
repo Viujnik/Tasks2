@@ -19,31 +19,31 @@ def valid_task_data():
 
 class TestTaskValidation:
     def test_correct_task_creation(self, valid_task_data):
-        """Проверяем, что валидная задача создается без ошибок."""
+        """Проверяет, что валидная задача создается без ошибок."""
         task = Task(**valid_task_data)
         assert task.task_id == 123
         assert task.status == "created"
 
     def test_invalid_type(self, valid_task_data):
-        """Проверяем TypeRule: task_id должен быть int."""
+        """Проверяет TypeRule: task_id должен быть int."""
         valid_task_data["task_id"] = "not_an_int"
         with pytest.raises(TypeError):
             Task(**valid_task_data)
 
     def test_invalid_status(self, valid_task_data):
-        """Проверяем StatusRule: левый статус должен кидать StatusError."""
+        """Проверяет StatusRule: левый статус должен кидать StatusError."""
         valid_task_data["status"] = "hacking_rkn"
         with pytest.raises(StatusError):
             Task(**valid_task_data)
 
     def test_min_len_description(self, valid_task_data):
-        """Проверяем MinLenRule: описание < 8 символов."""
+        """Проверяет MinLenRule: описание < 8 символов."""
         valid_task_data["description"] = "short"
         with pytest.raises(LenError):
             Task(**valid_task_data)
 
     def test_priority_range(self, valid_task_data):
-        """Проверяем MaxValue: приоритет 1-5."""
+        """Проверяет MaxValue: приоритет 1-5."""
         valid_task_data["priority"] = 10
         with pytest.raises(ValueError):
             Task(**valid_task_data)
@@ -51,7 +51,7 @@ class TestTaskValidation:
 
 class TestTaskProperties:
     def test_is_on_time_logic(self, valid_task_data):
-        """Проверяем вычисляемое свойство успеха"""
+        """Проверяет вычисляемое свойство успеха"""
         valid_task_data["status"] = "finished"
         valid_task_data["deadline"] = datetime.datetime.now() + datetime.timedelta(days=5)
         task = Task(**valid_task_data)
