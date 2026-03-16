@@ -1,6 +1,7 @@
 import pytest
 import datetime
-from src.tasks_models import Task, FileSource, ConsoleSource, APISource
+from src.tasks_models import Task
+from src.sources import FileSource, ConsoleSource, APISource
 from src.validators.errors import LenError, StatusError
 
 
