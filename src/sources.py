@@ -26,8 +26,8 @@ class FileSource:
         """Форматирует данные о файле и дедлайне."""
         header = task.summary
         p = task.payload
-        timing = f"\t🕒 Deadline: {task.deadline.strftime('%d.%m %H:%M')}"
-        details = f"\t🎥 File: {p['filename']} ({p['file_size']} MB) | Sender ID: {p['sender_id']}"
+        timing = f"\tDeadline: {task.deadline.strftime('%d.%m %H:%M')}"
+        details = f"\tFile: {p['filename']} ({p['file_size']} MB) | Sender ID: {p['sender_id']}"
         return f"{header}\n{timing}\n{details}\n"
 
 
@@ -51,8 +51,8 @@ class ConsoleSource:
         """Форматирует вывод системной команды и результата."""
         p = task.payload
         return (f"{task.summary}\n"
-                f"   💻 User({p['sender_id']}) executed: {p['command']}\n"
-                f"   ⚡ Result: {p['status']}\n")
+                f"   User({p['sender_id']}) executed: {p['command']}\n"
+                f"   Result: {p['status']}\n")
 
 
 class APISource:
@@ -78,5 +78,5 @@ class APISource:
         """Форматирует информацию об URL и методе запроса."""
         p = task.payload
         return (f"{task.summary}\n"
-                f"   🌐 Client({p['client_id']}) {p['HTTP_METHOD']} -> {p['url']}\n"
-                f"   🚫 Response: {p['status_code']}\n")
+                f"   Client({p['client_id']}) {p['HTTP_METHOD']} -> {p['url']}\n"
+                f"   Response: {p['status_code']}\n")
